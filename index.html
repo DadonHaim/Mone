@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/lib.css"/>
+    <title>Document</title>
+    <script src="/lib/vanila/array.js"></script>
+    <script src="/lib/vanila/boolean.js"></script>
+    <script src="/lib/vanila/number.js"></script>
+    <script src="/lib/dom/Dom.js"></script>
+    <script src="/tools.js"></script>
+    <script src="/store.js"></script>
+
+</head>
+<body>
+    
+    <div id="alert">
+        <div id="alert-text"></div>
+        <button id="settingsBtn"></button>
+    </div>
+    <div id="search">
+        <input type="number" id="searchInp" placeholder="חפש" />
+    </div>
+    <div id="listPage"></div>
+    <div id="monePage"></div>
+    <div id="settingsPage"></div>
+
+    <div id="popup">
+        <button id="cancelpopup">X</button>
+        <div id="popupContext"></div>
+    </div>
+
+
+    <script src="components/alert.js"></script>
+    <script src="components/list.js"></script>
+    <script src="components/mone.js"></script>
+    <script src="index.js"></script>
+
+
+    <script> 
+        if ('serviceWorker' in navigator) { 
+            navigator.serviceWorker.register('/service-worker.js')
+            .then(function (registration) {console.log("registorarion")})
+            .catch(function (error) {console.log(error)});
+        } 
+        else{
+            console.log("no serviceWorker")
+        }
+    </script>
+</body>
+</html>

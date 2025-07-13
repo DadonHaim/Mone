@@ -1,0 +1,1 @@
+type IPage = "list"|"mone"|"settings"

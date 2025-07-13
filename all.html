@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script src="/lib/dom/Dom.js"></script>
+    <style >
+        body{
+            direction: rtl;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        
+        
+    </div>
+    
+
+    <script>
+        fetch("/all").then(d=>d.json()).then(_data=>{
+            let data = _data.all;
+
+            let root = document.getElementById("root")
+
+            data.forEach(mone=>{
+                createElement({
+                    dad:root,
+                    children:[
+                        createElement({tag:"h2" , html:mone.id}),
+                        createElement({tag:"p" , html:mone.unRead}),
+                        createElement({tag:"p" , html:mone.message}),
+                        ...mone.images.map(im=>{
+                            return createElement({tag:"img" , src:im, onClick:()=>{
+
+                            }})
+                        })
+                        
+                    ]
+                })
+
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",                 // תואם לשנת 2022
+    "module": "none",                 // סוג המודולים
+    "outDir": "./build",                // תקיית פלט (BUILD) לקבצי JS
+    "rootDir": "./",                    // תקיית המקור - התיקייה הראשית
+    "moduleResolution": "node",         // מאפשר עבודה עם מודולים בסגנון Node
+    // "resolveJsonModule": true,          // מאפשר ייבוא קבצי JSON
+    "esModuleInterop": true,            // מאפשר עבודה עם ES Modules ו-CommonJS
+    "forceConsistentCasingInFileNames": true, // רגישות לאותיות גדולות/קטנות בשמות קבצים
+    "skipLibCheck": true,  // דילוג על בדיקת סוגי הספריות
+    "sourceMap" : false,             
+  },
+  "exclude": ["node_modules", "build"], // יוצאים מהחישוב את node_modules ו-build
+  // "files": [],
+  "watchOptions": {
+    "watchFile": "useFsEvents"
+  }
+}

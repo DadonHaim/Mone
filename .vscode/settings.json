@@ -1,0 +1,33 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".vscode": true,
+        "package-lock.json": true,
+        "tsconfig.json": true,
+        "manifest.json": true,
+        "service-worker.js": true,
+        "eng.traineddata": true,
+        "heb.traineddata": true,
+        "node_modules": true,
+        "build": true,
+        ".wwebjs_cache": true,
+        ".wwebjs_auth": true
+    },
+    "hide-files.files": [
+        ".vscode",
+        "package-lock.json",
+        "tsconfig.json",
+        "manifest.json",
+        "service-worker.js",
+        "eng.traineddata",
+        "heb.traineddata",
+        "node_modules",
+        "build",
+        ".wwebjs_cache",
+        ".wwebjs_auth"
+    ]
+}
