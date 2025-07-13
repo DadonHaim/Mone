@@ -142,7 +142,6 @@ app.get("/uploadImage", async(req,res)=>{
 
 client.initialize();
 
-app.listen(PORT,()=>{
-  console.log("http://localhost:"+PORT)
-})
-
+app.listen(3001, '0.0.0.0', () => {
+  console.log('Server running on port 3001');
+});
