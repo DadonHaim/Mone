@@ -6,7 +6,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "nodemon build/server.cjs",
+    "start": "node build/server.cjs",
+    "mon": "nodemon build/server.cjs",
     "service": "node build/server-service.cjs",
     "tsc": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
