@@ -9,6 +9,3 @@ function Alert(text="",color="black"){
     },2500)
 }
 
-document.getElementById("settingsBtn").onclick = ()=>{
-    setPage("settings")
-}

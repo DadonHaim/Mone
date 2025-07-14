@@ -8,10 +8,15 @@
     list();
     mone();
     setPage("list")
-    setStatus();
+    setStatus(); 
 })();
 
 
+document.getElementById("settingsBtn").onclick = ()=>{
+    // setPage("settings")
+    location.reload();
+
+}
 
 let search = document.getElementById("searchInp")
 

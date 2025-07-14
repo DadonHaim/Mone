@@ -1,13 +1,11 @@
 let gateSnap = true;
-setInterval(()=>{
-    if(gateSnap == false){
+setInterval(() => {
+    if (gateSnap == false) {
         gateSnap = true;
     }
-},1000)
-
-function mone(){
+}, 1000);
+function mone() {
     let monePage = document.getElementById("monePage");
-    
     monePage.innerHTML = `
         <div id="menuImage" >
                 <video id="camera" autoplay playsinline></video>
@@ -94,15 +92,14 @@ function mone(){
             </div>
         </div>
     `;
-
-    async function render(){
-        let _activeMone = await GET("/getMone/"+activeMone.id) as IMone
-        const [albom,unReadSelect,update,update2,submit2,cancelRead] = getElementsByIds("albom","unReadSelect","update","update2","submit2","cancelRead");
-        const [moneId,moneGashash,moneName,phone1,phone2,address,street,streetNumber,entry,floor,house,] = getElementsByIds("mone-id","mone-gashash","mone-name","mone-phone1","mone-phone2","mone-address","mone-street","mone-streetNumber","mone-entry","mone-floor","mone-house");
-        const [typeHouse,locationSelect,message,submit] = getElementsByIds("typeHouse","locationSelect","mone-message","submit");
-        albom.innerHTML=""
-        moneId.innerHTML = `${_activeMone.id.substring(0,_activeMone.id.length-5)}<span class="numberMone">${_activeMone.number}<span>`
-        moneGashash.value = _activeMone.gashash=="גשש"?"גשש":"רגיל";
+    async function render() {
+        let _activeMone = await GET("/getMone/" + activeMone.id);
+        const [albom, unReadSelect, update, update2, submit2, cancelRead] = getElementsByIds("albom", "unReadSelect", "update", "update2", "submit2", "cancelRead");
+        const [moneId, moneGashash, moneName, phone1, phone2, address, street, streetNumber, entry, floor, house,] = getElementsByIds("mone-id", "mone-gashash", "mone-name", "mone-phone1", "mone-phone2", "mone-address", "mone-street", "mone-streetNumber", "mone-entry", "mone-floor", "mone-house");
+        const [typeHouse, locationSelect, message, submit] = getElementsByIds("typeHouse", "locationSelect", "mone-message", "submit");
+        albom.innerHTML = "";
+        moneId.innerHTML = `${_activeMone.id.substring(0, _activeMone.id.length - 5)}<span class="numberMone">${_activeMone.number}<span>`;
+        moneGashash.value = _activeMone.gashash == "גשש" ? "גשש" : "רגיל";
         moneName.value = _activeMone.name;
         phone1.value = _activeMone.phone1;
         phone2.value = _activeMone.phone2;
@@ -114,150 +111,125 @@ function mone(){
         house.value = _activeMone.house;
         street.value = _activeMone.street;
         message.value = _activeMone.message;
-        setSelect(typeHouse , _activeMone.type)
-        setSelect(unReadSelect , _activeMone.unRead)
-        setSelect(locationSelect , _activeMone.location)
-
-        submit.onclick = ()=>{onSubmit()}
-        submit2.onclick = ()=>{onSubmit()}
-        update.onclick = ()=>{onSubmit(true)}
-        update2.onclick = ()=>{onSubmit(true)}
-        cancelRead.onclick = ()=>{onSubmit(true,true)}
-
-        _activeMone.images.forEach((im)=>{
-            AlbomItem(_activeMone,im,albom)
-        })
-        
-
-        function onSubmit(upd = false,canceRead=false){              
-            _activeMone.gashash      = moneGashash.value;                               
-            _activeMone.name         = moneName.value;                  
-            _activeMone.phone1       = phone1.value;                  
-            _activeMone.phone2       = phone2.value;                  
-            _activeMone.address      = address.value;                  
-            _activeMone.street       = street.value;                  
-            _activeMone.streetNumber = streetNumber.value;                          
-            _activeMone.entry        = entry.value;                  
-            _activeMone.floor        = floor.value;                  
-            _activeMone.house        = house.value;                  
-            _activeMone.street       = street.value;                  
-            _activeMone.message      = message.value;                  
-            _activeMone.type         = typeHouse.value;                  
-            _activeMone.location     = locationSelect.value;                  
-            _activeMone.unRead       = unReadSelect.value;                  
-            if(canceRead || _activeMone.unRead !="--"){ _activeMone.read = false;}
-            else{_activeMone.read = true;}
-
-            if(_activeMone.images.length<1 && upd==false  ){
-                alert("אין תמונה")
+        setSelect(typeHouse, _activeMone.type);
+        setSelect(unReadSelect, _activeMone.unRead);
+        setSelect(locationSelect, _activeMone.location);
+        submit.onclick = () => { onSubmit(); };
+        submit2.onclick = () => { onSubmit(); };
+        update.onclick = () => { onSubmit(true); };
+        update2.onclick = () => { onSubmit(true); };
+        cancelRead.onclick = () => { onSubmit(true, true); };
+        _activeMone.images.forEach((im) => {
+            AlbomItem(_activeMone, im, albom);
+        });
+        function onSubmit(upd = false, canceRead = false) {
+            _activeMone.gashash = moneGashash.value;
+            _activeMone.name = moneName.value;
+            _activeMone.phone1 = phone1.value;
+            _activeMone.phone2 = phone2.value;
+            _activeMone.address = address.value;
+            _activeMone.street = street.value;
+            _activeMone.streetNumber = streetNumber.value;
+            _activeMone.entry = entry.value;
+            _activeMone.floor = floor.value;
+            _activeMone.house = house.value;
+            _activeMone.street = street.value;
+            _activeMone.message = message.value;
+            _activeMone.type = typeHouse.value;
+            _activeMone.location = locationSelect.value;
+            _activeMone.unRead = unReadSelect.value;
+            if (canceRead || _activeMone.unRead != "--") {
+                _activeMone.read = false;
             }
-            else{
+            else {
+                _activeMone.read = true;
+            }
+            if (_activeMone.images.length < 1 && upd == false) {
+                alert("אין תמונה");
+            }
+            else {
                 POST("/updatMone", _activeMone)
-                .then((d)=>{
-                    if(upd) {
-                        Alert("הדיווח נשלח בהצלחה")
-                        return
+                    .then((d) => {
+                    if (upd) {
+                        Alert("הדיווח נשלח בהצלחה");
+                        return;
                     }
-
-                    if(_activeMone.unRead !="--"){
-                        setUnRead(_activeMone)
+                    if (_activeMone.unRead != "--") {
+                        setUnRead(_activeMone);
                     }
-                    else{
+                    else {
                         setRead(_activeMone);
                     }
-                    Alert("הדיווח נשלח בהצלחה")
-                    setPage("list")
+                    Alert("הדיווח נשלח בהצלחה");
+                    setPage("list");
                 })
-                .catch(err=>{
-                    console.log("err",err)
-                    alert("ישנה שגיאה")
-                })
+                    .catch(err => {
+                    console.log("err", err);
+                    alert("ישנה שגיאה");
+                });
             }
         }
-
-
-
-        const video = document.getElementById('camera') as HTMLVideoElement;
-        const canvas = document.getElementById('photo') as HTMLCanvasElement;
+        const video = document.getElementById('camera');
+        const canvas = document.getElementById('photo');
         const snapBtn = document.getElementById('snap');
         const snapBtn2 = document.getElementById('snap2');
-        async function initCamera(){
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" }},audio: false });
+        async function initCamera() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } }, audio: false });
             video.srcObject = stream;
         }
-
-        
-        function snap(){
-            console.log("snap")
- 
-            if(!gateSnap) return
+        function snap() {
+            console.log("snap");
+            if (!gateSnap)
+                return;
             gateSnap = false;
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
             const base64Image = canvas.toDataURL('image/png');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             _activeMone.images.push(base64Image);
-            AlbomItem(_activeMone,base64Image,albom)       
+            AlbomItem(_activeMone, base64Image, albom);
         }
-
-        snapBtn2.addEventListener('click', () => {snap()})
-        snapBtn.addEventListener('click', () => {snap()});
-        video.addEventListener('click', () => {snap()});
-
+        snapBtn2.addEventListener('click', () => { snap(); });
+        snapBtn.addEventListener('click', () => { snap(); });
+        video.addEventListener('click', () => { snap(); });
         initCamera();
     }
-
-
-
-    onActivePage("mone" ,()=>{
+    onActivePage("mone", () => {
         render();
-    })
-
+    });
 }
-
-
-
-
-function AlbomItem(mone:IMone,base64,dad){
+function AlbomItem(mone, base64, dad) {
     let image = createElement({
-        className:"albomItem",
-        onClick:()=>{
-            
+        className: "albomItem",
+        onClick: () => {
         },
-        children:[
+        children: [
             createElement({
-                tag:"button",
-                className:"removeImage",
-                html :"X",
-                onClick:()=>{
+                tag: "button",
+                className: "removeImage",
+                html: "X",
+                onClick: () => {
                     mone.images.removeByValue(base64);
-                    image.innerHTML=""
-                    image.style.display="none"
+                    image.innerHTML = "";
+                    image.style.display = "none";
                 }
             }),
             createElement({
-                tag:"img",
-                className:"img",
-                src:base64,
-                onClick:()=>{
+                tag: "img",
+                className: "img",
+                src: base64,
+                onClick: () => {
                     popup(`
                         <img id="popup-image"/>    
-                    `,()=>{
-                        let img = document.getElementById("popup-image") as HTMLImageElement
-                        img.src=base64
-                    })
+                    `, () => {
+                        let img = document.getElementById("popup-image");
+                        img.src = base64;
+                    });
                 }
             }),
-
         ],
-    })
-
-
-    dad.appendChild(image)
-    
-
+    });
+    dad.appendChild(image);
 }

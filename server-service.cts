@@ -32,7 +32,7 @@ function extractItems(text) {
 
 
        for (let j = i + 1; j <= i + 2 && j < lines.length; j++) {
-         const matchID = lines[j].match(/\d{4}-\d{7}/);
+         const matchID = lines[j].match(/\d{4}-\d{8}/);
          if (matchID) id = matchID[0];
          const matchPhone = lines[j].match(/05\d{8}/);
          if (matchPhone) phone = matchPhone[0];
@@ -40,7 +40,7 @@ function extractItems(text) {
         items.push({ address, id, phone });
     }
   }
-
+    
     items.forEach((mone=>{
         if(!mone.id) return
         for(let key in list){

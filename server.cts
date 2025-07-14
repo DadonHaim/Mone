@@ -63,10 +63,19 @@ app.get("/lib/lib.css", (req, res, next) => {
     });
 });
 
+app.get("/lib/lib.css", (req, res, next) => {
+    fs.readFile(path.join(__dirname, "..","lib", "lib.css"), "utf8", (err, data) => {
+        if (err) return next(err);
+        res.setHeader("Content-Type", "text/css");
+        res.send(data);
+    });
+});
+
 
 app.get('/data',(req,res)=>{
     res.sendFile(path.join(__dirname, "..", "mones.json"))
 })
+
 app.get("/sync", async(req,res)=>{
     let _data = fs.readFileSync(path.join(__dirname, "..", "data.json")).toString();
     let data = JSON.parse(_data);
